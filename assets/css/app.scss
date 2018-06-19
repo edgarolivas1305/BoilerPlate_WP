@@ -1,0 +1,155 @@
+
+/*=============================================
+=            Custom Reset            =
+=============================================*/
+
+/*----------  Import fonts  ----------*/
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700|Merriweather:300,400,700');
+
+
+*{
+	padding: 0;
+	margin: 0;
+}
+
+/*=====  End of Custom Reset  ======*/
+
+/*=============================================
+=            GENERAL SETTINGS            =
+=============================================*/
+
+/*----------  VARIABLES  ----------*/
+/*=====  Media Query  ======*/
+$grid-small: 39.9375em;
+$grid-medium: 750px;
+$grid-large: 990px;
+$grid-widescreen: 1400px;
+$grid-gutter: 30px;
+$grid-gutter-mobile: 22px;
+
+$small: 'small';
+$medium: 'medium';
+$medium-down: 'medium-down';
+$medium-up: 'medium-up';
+$large: 'large';
+$large-down: 'large-down';
+$large-up: 'large-up';
+$widescreen: 'widescreen';
+
+$grid-breakpoint-has-widths: ($small, $medium-up);
+$grid-breakpoint-has-push: ($small, $medium-up);
+
+$grid-breakpoints: (
+  $small '(max-width: #{$grid-small})',
+  $medium '(min-width: #{$grid-medium}) and (max-width: #{$grid-large - 1})',
+  $medium-down '(max-width: #{$grid-large - 1})',
+  $medium-up '(min-width: #{$grid-medium})',
+  $large '(min-width: #{$grid-large}) and (max-width: #{$grid-widescreen - 1})',
+  $large-down '(max-width: #{$grid-widescreen - 1})',
+  $large-up '(min-width: #{$grid-large})',
+  $widescreen '(min-width: #{$grid-widescreen})'
+);
+
+/*=====  Colors  ======*/
+
+
+/*=====  Font Family  ======*/
+$mainfont: 'your font';
+$secfont: 'your secondary font';
+
+
+
+/*----------  Mixins  ----------*/
+
+/*=====  Media Query  ======*/
+@mixin media-query($media-query) {
+	$breakpoint-found: false;
+  
+	@each $breakpoint in $grid-breakpoints {
+	  $name: nth($breakpoint, 1);
+	  $declaration: nth($breakpoint, 2);
+  
+	  @if $media-query == $name and $declaration {
+		$breakpoint-found: true;
+  
+		@media only screen and #{$declaration} {
+		  @content;
+		}
+	  }
+	}
+  
+	@if $breakpoint-found == false {
+	  @warn 'Breakpoint "#{$media-query}" does not exist';
+	}
+}
+
+/*=====  Backgrounds  ======*/
+@mixin urlbg($img) {
+	background-size: cover;
+	background-position: center;
+	background-image: url($img);
+}
+@mixin embedbg() {
+	background-size: cover;
+	background-position: center;
+}
+
+
+/*----------  Custom Paddings  ----------*/
+.pad-und-lg{
+	padding-top: 100px;
+	padding-bottom: 100px;
+}
+
+.pad-und-md{
+	padding-top: 70px;
+	padding-bottom: 70px;
+}
+
+.pad-und-sm{
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.pad-und-xs{
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.pad-und-xxs{
+	padding-top: 10px;
+	padding-bottom: 10px;	
+}
+.pad-none{
+	padding: 0 !important;
+}
+.pad-none-xs{
+	@include media-query($small) {
+		padding: 0;
+	}	
+}
+
+/*----------  Displays  ----------*/
+.display-none{
+    display: none;
+}
+.dp_flex_jc{
+	display: flex;
+	justify-content: center;
+}
+.dp_flex_ac{
+	display: flex;
+	align-items: center;
+}
+.dp_flex_cc{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+/*=====  End of GENERAL SETTINGS  ======*/
+
+/*=====================================================
+=            Global Styles h1, h2 , h3....            =
+=====================================================*/
+
+
+/*=====  End of Global Styles h1, h2 , h3....  ======*/

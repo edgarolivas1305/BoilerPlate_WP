@@ -1,4 +1,10 @@
-<?php
+<?php 
+    #---------------------------------------------------------------------------#
+    # Hide Adminbar                                                             #
+    #---------------------------------------------------------------------------#
+    
+    show_admin_bar(false);
+
     #---------------------------------------------------------------------------#
     # URL Template and blog                                                     #
     #---------------------------------------------------------------------------#
@@ -8,7 +14,41 @@
     }
 
     function blog_url() {
-        bloginfo('url');
+        echo bloginfo('url');
+    }
+
+  	#---------------------------------------------------------------------------#
+    # Enqueue Frontend Scripts and Styles                                       #
+    #---------------------------------------------------------------------------#
+
+	add_action( 'wp_enqueue_scripts', 'load_css_frames' );
+
+    function load_css_frames() {
+        //Foundation
+        wp_enqueue_style('foundation',get_template_directory_uri() . "/assets/css/foundation.min.css", array(), '', 'all');
+        //Bootstrap
+        // wp_enqueue_style('bootstrap',get_template_directory_uri() . "/assets/css/bootstrap.min.css", array(), '', 'all');
+        //wp-editor
+        wp_enqueue_style('wp-editor',get_template_directory_uri() . "/assets/css/wp-editor.css", array(), '', 'all');
+        //Style Theme
+        wp_enqueue_style('style',get_template_directory_uri() . "/assets/css/app.css", array(), '', 'all');
+        
+    }
+
+    add_action( 'wp_enqueue_scripts', 'load_scripts_frames' );
+
+    function load_scripts_frames() {
+        //Jquery
+        wp_enqueue_script('jquery', get_template_directory_uri() . '/assets/js/jquery.min.js', array(), '', 'all' );
+        //Foundation
+        wp_enqueue_script('foundation', get_template_directory_uri() . '/assets/js/foundation.min.js', array(), '', 'all' );
+        //Bootstrap
+        // wp_enqueue_script('foundation', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array(), '', 'all' );
+        //Fontawesome
+        wp_enqueue_script('fontawesome', get_template_directory_uri() . '/assets/js/fontawesome-all.min.js', '', 'all');
+        //Sript WP
+        wp_enqueue_script('script',get_template_directory_uri() . "/assets/js/app.js", array(), '', 'all');
+                
     }
 
     #---------------------------------------------------------------------------#
@@ -29,16 +69,9 @@
 
 	function register_menus() {
         register_nav_menus( array(
-            'main-menu' => __('Main Menu', 'lagom'),
-            'social-menu' => __('Social','lagom')
+            'main-menu' => __('Main Menu', 'taller'),
         ));
     }
-
-    #---------------------------------------------------------------------------#
-    # Hide Adminbar                                                             #
-    #---------------------------------------------------------------------------#
-    
-    show_admin_bar(false);
 
     #---------------------------------------------------------------------------#
     # Add Thumbnails Support                                                    #
@@ -63,7 +96,7 @@
     # SMK Template Loader                                                       #
     #---------------------------------------------------------------------------#
 
-    include 'includes/smk.php';
+    include 'assets/inc/smk.php';
 
     function buildTree( array $elements, $parentId = 0 )
     {
@@ -81,69 +114,21 @@
             }
         }
         return $branch;
-    }    
+    }
 
-  	#---------------------------------------------------------------------------#
-    # Enqueue Frontend Scripts and Styles                                       #
     #---------------------------------------------------------------------------#
+    # Simple Page Ordering                                                      #
+    #---------------------------------------------------------------------------# 
 
-	add_action( 'wp_enqueue_scripts', 'lagom_load_css' );
+    //Include Simple Page Ordering
+    include_once( get_stylesheet_directory() . '/assets/inc/simple-page-ordering/simple-page-ordering.php' );
 
-    function lagom_load_css() {
-        //Swiper
-        wp_enqueue_style('swiper',get_template_directory_uri() . "/css/swiper.min.css", array(), '', 'all');
-        //Normalize
-        wp_enqueue_style('normalize',get_template_directory_uri() . "/css/normalize.css", array(), '', 'all');
-        //Foundation
-        wp_enqueue_style('foundation',get_template_directory_uri() . "/css/foundation.min.css", array(), '', 'all');
-        //Font Awesome
-        // wp_enqueue_style('font-awesome',get_template_directory_uri() . "/css/font-awesome.min.css", array(), '', 'all');
-        //Hover
-        // wp_enqueue_style('hover',get_template_directory_uri() . "/css/hover.css", array(), '', 'all');
-        //Swal
-        // wp_enqueue_style('swal',get_template_directory_uri() . "/css/swal.css", array(), '', 'all');
-        //Hamburguers
-        wp_enqueue_style('hamburgers',get_template_directory_uri() . "/css/hamburgers.css", array(), '', 'all');
-        //Animated
-        // wp_enqueue_style('animated',get_template_directory_uri() . "/css/animations.css", array(), '', 'all');
-        //Izimodal
-        wp_enqueue_style('izimodal',get_template_directory_uri() . "/css/iziModal.min.css", array(), '', 'all');
-        //wp-editor
-        wp_enqueue_style('wp-editor',get_template_directory_uri() . "/css/wp-editor.css", array(), '', 'all');
-        //Style Theme
-        wp_enqueue_style('style',get_template_directory_uri() . "/style.css", array(), '', 'all');
-        
-    }
 
-    add_action( 'wp_enqueue_scripts', 'lagom_load_scripts' );
+    #---------------------------------------------------------------------------#
+    # Protect WordPress Against Malicious URL Requests Plugin                   #
+    #---------------------------------------------------------------------------# 
 
-    function lagom_load_scripts() {
-        // if ( is_page_template( 'page-about.php' ) ) {
-        //     $key = 'AIzaSyBVQQ73Yp-ChV1eLDrlyPPlNwxK-qXsQng';
-        //     wp_enqueue_script( 'gmaps', 'https://maps.googleapis.com/maps/api/js?key=' . $key . '&libraries=places', null, null, true );
-        // }
-        //Jquery
-        wp_enqueue_script('jquery', get_template_directory_uri() . '/js/jquery.min.js', array(), '', 'all' );
-        //Foundation
-        wp_enqueue_script('foundation', get_template_directory_uri() . '/js/foundation.min.js', array(), '', 'all' );
-        //Animated
-        // wp_enqueue_script('animate', get_template_directory_uri() . '/js/css3-animate-it.js', array(), '', 'all');        
-        //Swiper
-        wp_enqueue_script('swiper', get_template_directory_uri() . '/js/swiper.min.js', array(), '', 'all' );
-        //Fontaswesome
-        wp_enqueue_script('font-aswesomw', 'https://use.fontawesome.com/releases/v5.0.13/js/all.js', '', 'all');
-        //Swal
-        // wp_enqueue_script('swal', get_template_directory_uri() . '/js/swal.js', array(), '', 'all' );
-        //IziModal
-        wp_enqueue_script('izimodal', get_template_directory_uri() . '/js/iziModal.min.js', array(), '', 'all' );
-        //Skrollr
-        wp_enqueue_script('skrollr', get_template_directory_uri() . '/js/skrollr.min.js', array(), '', 'all');
-        //Modernizr
-        wp_enqueue_script('modernizr', get_template_directory_uri() . '/js/modernizr.js', array(), '', 'all');      
-        //Sript WP
-        wp_enqueue_script('script',get_template_directory_uri() . "/script.js", array(), '', 'all');
-                
-    }
+    include_once( get_stylesheet_directory() . '/assets/inc/security.php' );
 
 
 	#---------------------------------------------------------------------------#
@@ -177,18 +162,14 @@
         if (!$menu_ord) return true;
         return array(
             'index.php', // Dashboard
-            // 'separator1',
-            // 'edit.php?post_type=home_conf',
-            // 'edit.php?post_type=testimonial',
-            // 'edit.php?post_type=product',
             'separator1', // First separator
             'edit.php', // Páginas
-            'separator2', // First separator
+            'separator2', // Second separator
             'edit.php?post_type=page', // Páginas
             'separator-last', // Last separator
         );
     }
-    
+
 	#---------------------------------------------------------------------------#
     # Theme Widgets                                                             #
     #---------------------------------------------------------------------------#
@@ -207,35 +188,6 @@
 			) );
 	}
 
-	#---------------------------------------------------------------------------#
-    # Advanced Custom Fields                                                    #
-    #---------------------------------------------------------------------------# 
-
-    // //Include ACF Custom CSS
-    // if( class_exists('acf') ) {
-    // 	add_action( 'admin_enqueue_scripts', 'load_acf_style' );
-
-    //     function load_acf_style() {
-    //         wp_register_style( 'acf_css', get_template_directory_uri() . '/css/acf.css', array( 'acf-global','acf-input' ), '1.0.0' );
-    //         wp_enqueue_style( 'acf_css' );
-    //     }
-    // }
-
-    #---------------------------------------------------------------------------#
-    # Simple Page Ordering                                                      #
-    #---------------------------------------------------------------------------# 
-
-    //Include Simple Page Ordering
-    include_once( get_stylesheet_directory() . '/inc/simple-page-ordering/simple-page-ordering.php' );
-
-
-    #---------------------------------------------------------------------------#
-    # Protect WordPress Against Malicious URL Requests Plugin                   #
-    #---------------------------------------------------------------------------# 
-
-    include_once( get_stylesheet_directory() . '/inc/security.php' );
-
-
     #---------------------------------------------------------------------------#
     # Get the Slug                   #
     #---------------------------------------------------------------------------# 
@@ -247,5 +199,5 @@
       if( $echo ) echo $slug;
       do_action('after_slug', $slug);
       return $slug;
-    }
+    }	
 ?>
