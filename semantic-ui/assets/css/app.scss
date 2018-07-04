@@ -48,13 +48,17 @@ $grid-breakpoints: (
     $small-up '(max-width: #{$grid-small})',
     /* Tablet / iPad Portrait */
     $medium '(min-width: #{$grid-medium}) and (max-width: #{$grid-medium-large - 1})',
-    /* Tablet / iPad Portrait / UP*/
+    /* Tablet / iPad Portrait / UP */
     $medium-up '(min-width: #{$grid-medium})',
     /* Computer / Desktop / iPad Landscape */
-    $large-mini '(min-width: #{$grid-large}) and (max-width: #{$grid-widescreen - 1})',
-    $large-mini-up '(min-width: #{$grid-large})',
-
-
+	$large-mini '(min-width: #{$grid-medium-large}) and (max-width: #{$grid-large - 1})',
+	/* Computer / Desktop / iPad Landscape / UP */
+	$large-mini-up '(min-width: #{$grid-medium-large})',
+	/* Large Monitor */
+	$large '(min-width: #{$grid-large}) and (max-width: #{$grid-widescreen - 1})',
+	/* Large Monitor / UP*/
+	$large-up '(min-width: #{$grid-large})',
+	/* Widescreen Monitor */
     $widescreen '(min-width: #{$grid-widescreen})'
 );
 

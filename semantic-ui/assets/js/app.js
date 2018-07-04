@@ -10,8 +10,7 @@ var full_url;
 =            Inits or Functions Excecutes            =
 ====================================================*/
 $(document).ready(function(){
-    /*-------- Foundation Init --------*/
-    $(document).foundation();
+    /*-------- Semantic Init --------*/
   
     /*----------  Pathname and Full Url  ----------*/
     pathname = window.location.pathname; // Returns path only
@@ -22,4 +21,4 @@ $(document).ready(function(){
 /*----------  Manual Redirection  ----------*/
 $('[redireccion]').on('click',function(){
     location.href = $(this)[0].getAttribute('redireccion');
-  });
+});
