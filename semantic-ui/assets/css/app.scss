@@ -1,0 +1,163 @@
+
+/*=============================================
+=            Custom Reset            =
+=============================================*/
+
+/*----------  Import fonts  ----------*/
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700|Merriweather:300,400,700');
+
+
+*{
+	padding: 0;
+	margin: 0;
+}
+
+/*=====  End of Custom Reset  ======*/
+
+/*=============================================
+=            GENERAL SETTINGS            =
+=============================================*/
+
+/*----------  VARIABLES  ----------*/
+/*=====  Media Query  ======*/
+$grid-small: 767px;
+$grid-medium: 768px;
+$grid-medium-large: 992px;
+$grid-large: 1200px;
+$grid-widescreen: 1920px;
+$grid-gutter: 30px;
+$grid-gutter-mobile: 22px;
+
+$small: 'small';
+$small-up: 'small-up';
+$medium: 'medium';
+$medium-up: 'medium-up';
+$large-mini: 'large-mini';
+$large-mini-up: 'large-mini-up';
+$large: 'large';
+$large-up: 'large-up';
+$widescreen: 'widescreen';
+
+$grid-breakpoint-has-widths: ($small, $medium-up);
+$grid-breakpoint-has-push: ($small, $medium-up);
+
+$grid-breakpoints: (
+    /* Mobile */
+    $small '(max-width: #{$grid-small})',
+    /* Mobile / UP */
+    $small-up '(max-width: #{$grid-small})',
+    /* Tablet / iPad Portrait */
+    $medium '(min-width: #{$grid-medium}) and (max-width: #{$grid-medium-large - 1})',
+    /* Tablet / iPad Portrait / UP*/
+    $medium-up '(min-width: #{$grid-medium})',
+    /* Computer / Desktop / iPad Landscape */
+    $large-mini '(min-width: #{$grid-large}) and (max-width: #{$grid-widescreen - 1})',
+    $large-mini-up '(min-width: #{$grid-large})',
+
+
+    $widescreen '(min-width: #{$grid-widescreen})'
+);
+
+/*=====  Colors  ======*/
+
+
+/*=====  Font Family  ======*/
+$mainfont: 'your font';
+$secfont: 'your secondary font';
+
+
+
+/*----------  Mixins  ----------*/
+
+/*=====  Media Query  ======*/
+@mixin media-query($media-query) {
+	$breakpoint-found: false;
+  
+	@each $breakpoint in $grid-breakpoints {
+	  $name: nth($breakpoint, 1);
+	  $declaration: nth($breakpoint, 2);
+  
+	  @if $media-query == $name and $declaration {
+		$breakpoint-found: true;
+  
+		@media only screen and #{$declaration} {
+		  @content;
+		}
+	  }
+	}
+  
+	@if $breakpoint-found == false {
+	  @warn 'Breakpoint "#{$media-query}" does not exist';
+	}
+}
+
+/*=====  Backgrounds  ======*/
+@mixin urlbg($img) {
+	background-size: cover;
+	background-position: center;
+	background-image: url($img);
+}
+@mixin embedbg() {
+	background-size: cover;
+	background-position: center;
+}
+
+
+/*----------  Custom Paddings  ----------*/
+.pad-und-lg{
+	padding-top: 100px;
+	padding-bottom: 100px;
+}
+
+.pad-und-md{
+	padding-top: 70px;
+	padding-bottom: 70px;
+}
+
+.pad-und-sm{
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.pad-und-xs{
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.pad-und-xxs{
+	padding-top: 10px;
+	padding-bottom: 10px;	
+}
+.pad-none{
+	padding: 0 !important;
+}
+.pad-none-xs{
+	@include media-query($small) {
+		padding: 0;
+	}	
+}
+
+/*----------  Displays  ----------*/
+.display-none{
+    display: none;
+}
+.dp_flex_jc{
+	display: flex;
+	justify-content: center;
+}
+.dp_flex_ac{
+	display: flex;
+	align-items: center;
+}
+.dp_flex_cc{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+/*=====  End of GENERAL SETTINGS  ======*/
+
+/*=====================================================
+=            Global Styles h1, h2 , h3....            =
+=====================================================*/
+
+
+/*=====  End of Global Styles h1, h2 , h3....  ======*/
